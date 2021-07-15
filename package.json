@@ -2,11 +2,15 @@
   "name": "english-for-kids-admin-panel",
   "scripts": {
     "build":"tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/app.js",
     "postinstall": "tsc",
-    "watch": "nodemon"
+    "watch": "nodemon",
+    "deploy": "git add. && git commit -m Heroku && git push heroku master"
   },
   "author": "Oxana Danilova",
+  "engines": {
+    "node": "14.16.0"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
