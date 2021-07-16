@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { createCategory, deleteCategory, getCategories, getCategoriesById, updateCategory } from "./repository";
+import { createCategory, deleteCategory, getCategories, getCategoriesById, selectWordsFromCategory, updateCategory } from "./repository";
 
-interface Category {
+/*interface Category {
     id: number,
     name: string,
     image: string
-}
+}*/
 
 const router = Router();
 
-router.delete('/:id', async(req, res)=>{
+/*router.delete('/:id', async(req, res)=>{
     const catId = Number(req.params.id);
     if (!catId){
         return res.sendStatus(400);
@@ -25,20 +25,20 @@ router.delete('/:id', async(req, res)=>{
 router.get('/', async (req, res)=>{
     const categories = await getCategories();
     res.json(categories);
-});
+});*/
 
-router.get('/:id', async (req, res)=>{
-    const catId = Number(req.params.id);
-    if (!catId){
+router.get('/:name', async (req, res)=>{
+    const catName = req.params.name;
+    if (!catName){
         return res.sendStatus(400);
     }
-    const cat = await getCategoriesById(catId);
-    if (!cat){
+    const words =  selectWordsFromCategory(catName);
+    if (!words){
         return res.sendStatus(400);
     }
-    res.json(cat);
+    res.json(words);
 
-});
+});/*
 
 router.post('/', async(req, res)=>{
     const data = req.body as Category;
@@ -60,6 +60,6 @@ router.put('/', async(req, res)=>{
     } catch (e) {
         return res.status(400).send(e);
     }
-})
+})*/
 
 export default router;
